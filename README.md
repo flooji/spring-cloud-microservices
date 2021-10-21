@@ -1,5 +1,5 @@
-# spring-microservices
-An educative example of spring microservices with two services (one uses a Mongo DB), a discovery and a config server.
+# spring-cloud-microservices
+An educative example of spring cloud microservices with two services (one uses a Mongo DB), a discovery and a config server.
 
 The repository could be expanded in the following way:
 - Add a scheduler in the birthday service that will retrieve all birthday persons from the DB that celebrate their birthday today and call the notification service.
