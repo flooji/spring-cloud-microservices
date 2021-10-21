@@ -24,10 +24,10 @@ In order to run the app, make sure you have all dependencies installed (```mvn c
 To see the running container you may run ```docker container ls```. Don't forget to stop the container once you're done with ```docker container stop birthdaymongodb```.
 
 When starting the application, follow this order:
-4. Start discovery server
-5. Start config server
-6. Start the notification service
-7. Start the birthday service
+1. Start discovery server
+2. Start config server
+3. Start the notification service
+4. Start the birthday service
 
 
 ### Create multiple service instances for notification service
