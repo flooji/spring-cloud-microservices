@@ -10,6 +10,12 @@ The repository could be expanded in the following way:
 
 Due to lack of time, this has not been implemented yet. :smiley:
 
+This is how an ideal Spring microservice architecture could look like:
+
+<img src="diagram-architecture-microservice.svg" alt="Spring Microservice architecture" width="600"/>
+
+Source: https://spring.io/microservices
+
 ## How it works
 
 ### Prerequisites
