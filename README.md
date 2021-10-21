@@ -7,6 +7,7 @@ The repository could be expanded in the following way:
 - Add security to the Mongo DB and the services
 - Add a Spring Cloud service gateway
 - Containerize the microservices and servers, make them ready to be deployed to the cloud (pipeline, port configs etc.)
+- Add a frontend
 
 Due to lack of time, this has not been implemented yet. :smiley:
 
@@ -34,7 +35,6 @@ When starting the application, follow this order:
 2. Start config server
 3. Start the notification service
 4. Start the birthday service
-
 
 ### Create multiple service instances for notification service
 To demonstrate the load balancing of the discovery server, you can create multiple notification service instances.
