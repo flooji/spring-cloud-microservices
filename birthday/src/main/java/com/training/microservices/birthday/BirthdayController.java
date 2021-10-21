@@ -44,7 +44,7 @@ public class BirthdayController {
 
     private static final Logger LOG = Logger.getLogger(BirthdayController.class.getName());
 
-    @RequestMapping("/config")
+    @GetMapping("/config")
     public String printConfig() {
         StringBuilder sb = new StringBuilder();
         sb.append(properties.getProperty());
@@ -66,13 +66,19 @@ public class BirthdayController {
         return repository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-    @PostMapping("/")
+    @PostMapping("/birthday")
     public BirthdayPerson createBirthdayChild(@RequestBody BirthdayPerson birthdayPerson) {
         LOG.info("Create new Birthday: " + birthdayPerson.toString());
-        return repository.save(birthdayPerson);
+        return repository.insert(birthdayPerson);
+    }
+  
+    @GetMapping("/birthday/list")
+    public BirthdayPerson[] getAllBirthdays() {
+        LOG.info("Get a list of all birthdays");
+        return repository.findAll().toArray(new BirthdayPerson[0]);
     }
 
-    @RequestMapping("/celebrate/{id}")
+    @PostMapping("/celebrate/{id}")
     public String celebrateBirthday(@PathVariable Long id) {
         LOG.info("Celebrate birthday of: " + id);
 
