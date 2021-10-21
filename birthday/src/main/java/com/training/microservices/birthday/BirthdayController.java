@@ -35,32 +35,32 @@ public class BirthdayController {
 
     private static final Logger LOG = Logger.getLogger(BirthdayController.class.getName());
 
-    @GetMapping("/{id}")
+    @GetMapping("/birthday/{id}")
     public String getBirthday(@PathVariable Long id) {
         LOG.info("Get birthday for id:" + id);
         BirthdayPerson birthdayPerson = repository.findById(id).orElseThrow(() -> new NotFoundException(id));
         return birthdayPerson.getBirthday();
     }
 
-    @GetMapping("/{lastName}/{firstName}")
+    @GetMapping("/birthday/{lastName}/{firstName}")
     public List<BirthdayPerson> getBirthday(@PathVariable String lastName, @PathVariable String firstName) {
         LOG.info("Get birthday for: " + firstName + " " + lastName);
         return repository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-    @PostMapping("/")
+    @PostMapping("/birthday")
     public BirthdayPerson createBirthdayChild(@RequestBody BirthdayPerson birthdayPerson) {
         LOG.info("Create new Birthday: " + birthdayPerson.toString());
         return repository.insert(birthdayPerson);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/birthday/list")
     public BirthdayPerson[] getAllBirthdays() {
         LOG.info("Get a list of all birthdays");
         return repository.findAll().toArray(new BirthdayPerson[0]);
     }
 
-    @RequestMapping("/birthday/{id}")
+    @PostMapping("/celebrate/{id}")
     public String celebrateBirthday(@PathVariable Long id) {
         LOG.info("Celebrate birthday of: " + id);
 
