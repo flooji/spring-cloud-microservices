@@ -51,7 +51,13 @@ public class BirthdayController {
     @PostMapping("/")
     public BirthdayPerson createBirthdayChild(@RequestBody BirthdayPerson birthdayPerson) {
         LOG.info("Create new Birthday: " + birthdayPerson.toString());
-        return repository.save(birthdayPerson);
+        return repository.insert(birthdayPerson);
+    }
+
+    @GetMapping("/list")
+    public BirthdayPerson[] getAllBirthdays() {
+        LOG.info("Get a list of all birthdays");
+        return repository.findAll().toArray(new BirthdayPerson[0]);
     }
 
     @RequestMapping("/birthday/{id}")
