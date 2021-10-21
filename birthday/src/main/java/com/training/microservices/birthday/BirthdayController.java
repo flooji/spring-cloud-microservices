@@ -6,7 +6,9 @@ import com.training.microservices.birthday.models.BirthdayPerson;
 import com.training.microservices.birthday.repositories.BirthdayRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
+@RefreshScope // will refresh @Value and @Beans when config changes
 public class BirthdayController {
 
     @Autowired
@@ -33,7 +36,22 @@ public class BirthdayController {
     @Autowired
     private RestTemplateBuilder restTemplateBuilder;
 
+    @Autowired
+    private BirthdayConfiguration properties;
+
+    @Value("${some.other.property}")
+    private String someOtherProperty;
+
     private static final Logger LOG = Logger.getLogger(BirthdayController.class.getName());
+
+    @GetMapping("/config")
+    public String printConfig() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(properties.getProperty());
+        sb.append(" || ");
+        sb.append(someOtherProperty);
+        return sb.toString();
+    }
 
     @GetMapping("/birthday/{id}")
     public String getBirthday(@PathVariable Long id) {
@@ -53,7 +71,7 @@ public class BirthdayController {
         LOG.info("Create new Birthday: " + birthdayPerson.toString());
         return repository.insert(birthdayPerson);
     }
-
+  
     @GetMapping("/birthday/list")
     public BirthdayPerson[] getAllBirthdays() {
         LOG.info("Get a list of all birthdays");
